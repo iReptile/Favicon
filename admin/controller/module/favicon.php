@@ -11,6 +11,8 @@ class Favicon extends \Opencart\System\Engine\Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
+		$separator = (substr(VERSION, 0, 7) < '4.0.2.0') ? '|' : '.';
+
 		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = [
@@ -28,8 +30,11 @@ class Favicon extends \Opencart\System\Engine\Controller {
 			'href' => $this->url->link('extension/favicon/module/favicon', 'user_token=' . $this->session->data['user_token'])
 		];
 
-		$data['save'] = $this->url->link('extension/favicon/module/favicon.save', 'user_token=' . $this->session->data['user_token']);
+		$data['save'] = $this->url->link('extension/favicon/module/favicon'. $separator . 'save', 'user_token=' . $this->session->data['user_token']);
 		$data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module');
+
+		$data['save_icon'] = VERSION == '4.0.0.0' ? 'fas fa-save' : 'fa-solid fa-save';
+		$data['back_icon'] = VERSION == '4.0.0.0' ? 'fas fa-reply' : 'fa-solid fa-reply';
 
 		$setting = $this->model_setting_setting->getSetting('module_' . $this->module_name);
 		$config_data = ['module_favicon_status', 'module_favicon_icon'];
