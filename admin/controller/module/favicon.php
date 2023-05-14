@@ -54,7 +54,6 @@ class Favicon extends \Opencart\System\Engine\Controller {
 			$data['alt_icon'] = $data['placeholder'];
 		}
 
-
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -89,7 +88,7 @@ class Favicon extends \Opencart\System\Engine\Controller {
 		$separator = (substr(VERSION, 0, 7) < '4.0.2.0') ? '|' : '.';
 		$events = [];
 				 
-		$events[] = [$this->extension_name, 'catalog/view/common/header/after', 'extension/' . $this->extension_name . '/module/' . $this->module_name . $separator . 'addFavicon', 'Add favicon uploader', 1, true];
+		$events[] = [$this->extension_name, 'catalog/view/common/header/after', 'extension/' . $this->extension_name . '/module/' . $this->module_name . $separator . 'addFaviconToHeader', 'Add favicon uploader', 1, true];
 
 		if (VERSION == '4.0.0.0') {
 			foreach($events as $key => $value) {
@@ -114,11 +113,4 @@ class Favicon extends \Opencart\System\Engine\Controller {
 
 		$this->model_setting_event->deleteEventByCode($this->extension_name);
 	}
-
-    public function addFavicon() {
-		$this->log->write('hallo');
-        print_r('TEST');
-
-		//<link rel="icon" type="image/x-icon" href="/image/catalog/opencart.ico">
-    }
 }
